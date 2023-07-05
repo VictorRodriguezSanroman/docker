@@ -1,0 +1,31 @@
+# Cada línea es una capa (cuantas mas pongas mas pesa)
+FROM ubuntu:22.04 
+# Descargamos la imagen si no la tenemos
+# RUN apt update && apt install -y curl
+# RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&\
+#     apt-get install -y nodejs
+# Alternativa para crear menos capas (importante poner las barras \ al final)
+RUN apt update \
+    && apt install -y curl \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+# Corremos los comandos necesarios
+WORKDIR /app
+# Creamos un directorio de trabajo
+COPY index.js ./
+# Copiamos el proyecto
+EXPOSE 3000
+# Documentamos en que puerto está
+
+# Shell form
+CMD node index.js
+# comando por defecto
+
+# Exec form
+# CMD ["node", "index.js", "$HOME"]
+# LO ponemos en marcha 
+
+# ENTRYPOINT [ "node" ]
+# ENTRYPOINT [ "ls"]
+# CMD ["-l"]
+#No se puede cambiar (le das  un binario)
